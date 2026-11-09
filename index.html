@@ -4,42 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10131b">
-<title>AI Mantra Counter</title>
+<title>AI Mantra Counter · Prototype 02</title>
 <style>
-  :root { color-scheme: dark; --bg:#10131b; --panel:#1a2030; --muted:#aab3c5; --accent:#d6b56d; --green:#75d6a2; }
-  * { box-sizing:border-box }
-  body { margin:0; min-height:100vh; background:radial-gradient(circle at top,#252b3c,var(--bg) 55%); color:#f5f2eb; font:16px system-ui,sans-serif; display:grid; place-items:center; padding:20px; }
-  main { width:min(100%,480px); background:rgba(26,32,48,.94); border:1px solid #343d52; border-radius:24px; padding:24px; box-shadow:0 18px 60px #0007; }
-  .eyebrow { color:var(--accent); letter-spacing:.14em; font-size:.72rem; font-weight:700; text-align:center; }
-  h1 { text-align:center; font-size:1.65rem; margin:8px 0 4px; }
-  .mantra { text-align:center; color:#e8d7ad; font-size:1.15rem; margin:0 0 22px; }
-  .count { text-align:center; font-size:3.4rem; line-height:1.1; font-weight:750; font-variant-numeric:tabular-nums; margin:12px 0; }
-  .sub { text-align:center; color:var(--muted); font-size:.9rem; }
-  .track { height:10px; background:#30394c; border-radius:20px; overflow:hidden; margin:18px 0 8px; }
-  .fill { height:100%; width:0%; background:linear-gradient(90deg,#75d6a2,#d6b56d); transition:width .2s; }
-  label { display:block; color:var(--muted); font-size:.85rem; margin:16px 0 6px; }
-  select, input { width:100%; background:#111725; border:1px solid #414b61; color:#fff; border-radius:12px; padding:12px; font:inherit; }
-  .buttons { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
-  button { border:0; border-radius:13px; padding:13px 12px; font:700 1rem system-ui; cursor:pointer; }
-  #start { background:var(--green); color:#102018; }
-  #stop { background:#39445a; color:#fff; }
-  #reset { width:100%; margin-top:10px; background:#252e40; color:#e8d7ad; }
-  button:disabled { opacity:.45; cursor:not-allowed; }
-  .status { display:flex; gap:9px; align-items:center; justify-content:center; margin:18px 0 8px; color:var(--muted); font-size:.9rem; min-height:24px; }
-  .dot { width:9px; height:9px; border-radius:50%; background:#7d879b; }
-  .dot.live { background:var(--green); box-shadow:0 0 12px var(--green); }
-  .heard { background:#111725; border:1px solid #30394c; padding:12px; border-radius:12px; min-height:58px; color:#cbd3e2; font-size:.88rem; overflow-wrap:anywhere; }
-  .note { color:var(--muted); font-size:.78rem; line-height:1.5; margin-top:16px; }
-  .complete { color:var(--green); font-weight:750; text-align:center; margin-top:12px; min-height:24px; }
+:root{color-scheme:dark;--bg:#10131b;--panel:#1a2030;--muted:#aab3c5;--accent:#d6b56d;--green:#75d6a2}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at top,#252b3c,var(--bg) 55%);color:#f5f2eb;font:16px system-ui,sans-serif;display:grid;place-items:center;padding:16px}
+main{width:min(100%,490px);background:rgba(26,32,48,.96);border:1px solid #343d52;border-radius:24px;padding:22px;box-shadow:0 18px 60px #0007}
+.eyebrow{color:var(--accent);letter-spacing:.13em;font-size:.7rem;font-weight:700;text-align:center}
+h1{text-align:center;font-size:1.6rem;margin:8px 0 4px}
+.mantra{text-align:center;color:#e8d7ad;font-size:1.12rem;margin:0 0 20px}
+.count{text-align:center;font-size:3.3rem;line-height:1.1;font-weight:750;font-variant-numeric:tabular-nums;margin:12px 0}
+.sub{text-align:center;color:var(--muted);font-size:.9rem}
+.track{height:10px;background:#30394c;border-radius:20px;overflow:hidden;margin:18px 0 8px}
+.fill{height:100%;width:0%;background:linear-gradient(90deg,#75d6a2,#d6b56d);transition:width .2s}
+label{display:block;color:var(--muted);font-size:.84rem;margin:15px 0 6px}
+select{width:100%;background:#111725;border:1px solid #414b61;color:#fff;border-radius:12px;padding:11px;font:inherit}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+button{border:0;border-radius:12px;padding:12px 10px;font:700 .96rem system-ui;cursor:pointer}
+#start{background:var(--green);color:#102018}
+#stop{background:#39445a;color:#fff}
+#reset{width:100%;margin-top:9px;background:#252e40;color:#e8d7ad}
+.correction{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.correction button{background:#30394c;color:#fff}
+button:disabled{opacity:.45;cursor:not-allowed}
+.status{display:flex;gap:9px;align-items:center;justify-content:center;margin:17px 0 8px;color:var(--muted);font-size:.88rem;min-height:24px}
+.dot{width:9px;height:9px;border-radius:50%;background:#7d879b}
+.dot.live{background:var(--green);box-shadow:0 0 12px var(--green)}
+.heard{background:#111725;border:1px solid #30394c;padding:12px;border-radius:12px;min-height:58px;color:#cbd3e2;font-size:.88rem;overflow-wrap:anywhere}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+.stat{background:#111725;border:1px solid #30394c;border-radius:12px;padding:10px;text-align:center}
+.stat strong{display:block;font-size:1.1rem}
+.stat span{font-size:.74rem;color:var(--muted)}
+.complete{color:var(--green);font-weight:750;text-align:center;margin-top:12px;min-height:24px}
+.note{color:var(--muted);font-size:.76rem;line-height:1.5;margin-top:15px}
 </style>
 </head>
 <body>
 <main>
-  <div class="eyebrow">VOICE-POWERED JAPA TRACKER · PROTOTYPE 01</div>
+  <div class="eyebrow">VOICE-POWERED JAPA TRACKER · PROTOTYPE 02</div>
   <h1>AI Mantra Counter</h1>
   <p class="mantra">ॐ नमः शिवाय · Om Namah Shivaya</p>
 
-  <div class="count"><span id="count">0</span><span style="color:#9da8bb;font-size:1.6rem"> / <span id="targetText">108</span></span></div>
+  <div class="count"><span id="count">0</span><span style="color:#9da8bb;font-size:1.55rem"> / <span id="targetText">108</span></span></div>
   <div class="sub" id="percent">0% completed</div>
   <div class="track"><div class="fill" id="fill"></div></div>
 
@@ -52,71 +58,165 @@
     <button id="start">Start listening</button>
     <button id="stop" disabled>Stop</button>
   </div>
+  <div class="correction">
+    <button id="minus" disabled>− 1 correction</button>
+    <button id="plus" disabled>+ 1 correction</button>
+  </div>
   <button id="reset">Reset session</button>
+  <button id="testAlarm" style="width:100%;margin-top:10px;background:#5a4725;color:#fff0c7">🔔 Test completion alarm</button>
 
   <div class="status"><span class="dot" id="dot"></span><span id="status">Ready · Tap Start listening</span></div>
   <label>Latest recognized speech</label>
   <div class="heard" id="heard">Your recognized words will appear here.</div>
+  <div class="stats">
+    <div class="stat"><strong id="recognized">0</strong><span>Automatic matches</span></div>
+    <div class="stat"><strong id="adjustments">0</strong><span>Manual corrections</span></div>
+  </div>
   <div class="complete" id="complete"></div>
   <p class="note">
-    Prototype limitation: this uses your browser's speech-recognition service (usually online).
-    It counts only when the recognized final text contains “Om Namah Shivaya”.
-    Recognition can miss or merge repetitions, especially during continuous chanting. Check the
-    displayed transcript and compare counts with a mala before relying on it for a full practice.
-    Keep this page open and the screen awake while testing.
+    Prototype 02 processes each finalized browser result index once, checks up to three recognition
+    alternatives, and accepts a small set of common transcript spelling variations. This is still
+    browser speech-to-text, not a trained Sanskrit audio model. Recognition may merge or miss chants.
+    Use the correction buttons when needed and compare longer tests with a mala.
   </p>
 </main>
 <script>
 (() => {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const $ = id => document.getElementById(id);
-  let recognition = null, running = false, count = 0;
-  let lastCountedResult = "";
-  const phrase = /om\s+namah\s+shivaya/gi;
+  let recognition = null, running = false, count = 0, automatic = 0, adjustments = 0;
+  let processedFinalIndices = new Set();
+  let completionTriggered = false;
+
+  // Normalizes punctuation and case but keeps word boundaries.
+  function normalize(text) {
+    return (text || "").toLowerCase()
+      .replace(/[’']/g, "")
+      .replace(/[^a-z\s]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  // Deliberately limited tolerance: "namah/nama" and "shivaya/shivay".
+  // Avoid broad fuzzy matching that could count unrelated speech.
+  function matchCount(text) {
+    const normalized = normalize(text);
+    const pattern = /\bom\s+nama(?:h)?\s+shivaya?\b/g;
+    return (normalized.match(pattern) || []).length;
+  }
 
   function render() {
     const target = Number($("target").value);
+    count = Math.max(0, Math.min(count, target));
     $("count").textContent = count;
     $("targetText").textContent = target;
     const pct = Math.min(100, count / target * 100);
     $("percent").textContent = `${pct.toFixed(1)}% completed`;
     $("fill").style.width = `${pct}%`;
-    if (count >= target) complete();
+    $("recognized").textContent = automatic;
+    $("adjustments").textContent = adjustments;
+    $("minus").disabled = count === 0;
+    $("plus").disabled = count >= target;
+    if (count >= target && !completionTriggered) complete();
+    if (count < target) {
+      completionTriggered = false;
+      $("complete").textContent = "";
+    }
   }
 
-  function bell() {
+  async function playCompletionAlarm(testOnly = false) {
+    // Browser audio must be enabled by a user gesture at least once on many phones.
     try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const now = ctx.currentTime;
-      [0, .22, .44].forEach((delay, i) => {
-        const osc = ctx.createOscillator(), gain = ctx.createGain();
-        osc.type = "sine";
-        osc.frequency.value = [880, 1174, 1480][i];
-        gain.gain.setValueAtTime(.0001, now + delay);
-        gain.gain.exponentialRampToValueAtTime(.18, now + delay + .02);
-        gain.gain.exponentialRampToValueAtTime(.0001, now + delay + .65);
-        osc.connect(gain); gain.connect(ctx.destination);
-        osc.start(now + delay); osc.stop(now + delay + .7);
-      });
-      setTimeout(() => ctx.close(), 1600);
-    } catch (e) { console.warn("Audio alert unavailable", e); }
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) throw new Error("Web Audio is unavailable in this browser.");
+      const ctx = new AudioCtx();
+      if (ctx.state === "suspended") await ctx.resume();
+
+      // Three repeated bell sequences, designed to be more noticeable than a single chime.
+      for (let round = 0; round < 3; round++) {
+        const startAt = ctx.currentTime + 0.08;
+        [784, 988, 1175].forEach((frequency, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.value = frequency;
+          const t = startAt + i * 0.24;
+          gain.gain.setValueAtTime(0.0001, t);
+          gain.gain.exponentialRampToValueAtTime(0.42, t + 0.025);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.95);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(t);
+          osc.stop(t + 1.0);
+        });
+        await new Promise(resolve => setTimeout(resolve, 1250));
+      }
+      await ctx.close();
+    } catch (e) {
+      console.warn("Audio alarm unavailable:", e);
+      $("status").textContent = "Sound could not play. Check media volume and browser audio permission.";
+    }
+
+    if ("vibrate" in navigator) {
+      navigator.vibrate([300, 150, 300, 150, 500]);
+    }
+
+    // Speak after the bells. Speech output uses the phone/browser's selected voice.
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const message = testOnly
+        ? "This is your mantra counter alarm test."
+        : `${Number($("target").value)} chants completed. Your Japa is complete.`;
+      const utterance = new SpeechSynthesisUtterance(message);
+      utterance.lang = "en-IN";
+      utterance.rate = 0.88;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+      window.speechSynthesis.speak(utterance);
+    }
+  }
+
+  function stopListening() {
+    running = false;
+    if (recognition) { try { recognition.stop(); } catch (e) {} }
+    $("dot").classList.remove("live");
+    $("start").disabled = false;
+    $("stop").disabled = true;
+    $("status").textContent = "Paused";
   }
 
   function complete() {
-    if (count !== Number($("target").value)) return;
+    completionTriggered = true;
     $("complete").textContent = `🔔 ${count} chants completed!`;
     if (running) stopListening();
-    bell();
-    if ("vibrate" in navigator) navigator.vibrate([180, 100, 180]);
+    playCompletionAlarm(false);
+  }
+
+  function chooseAlternative(result) {
+    let best = result[0] || {transcript:"", confidence:0};
+    let bestMatches = matchCount(best.transcript);
+    for (let i = 1; i < result.length; i++) {
+      const candidate = result[i];
+      const matches = matchCount(candidate.transcript);
+      // Prefer a candidate that contains more complete mantra matches.
+      // For equal match counts, prefer the higher reported confidence.
+      if (matches > bestMatches ||
+          (matches === bestMatches && (candidate.confidence || 0) > (best.confidence || 0))) {
+        best = candidate;
+        bestMatches = matches;
+      }
+    }
+    return {text:best.transcript || "", matches:bestMatches};
   }
 
   function startListening() {
     if (!SpeechRecognition) {
-      $("status").textContent = "Speech recognition isn't supported in this browser. Try current Chrome.";
+      $("status").textContent = "Speech recognition isn't supported here. Try current Chrome.";
       return;
     }
     if (running) return;
     recognition = new SpeechRecognition();
+    processedFinalIndices = new Set(); // New recognition session starts a fresh result-index sequence.
     recognition.lang = "en-IN";
     recognition.continuous = true;
     recognition.interimResults = true;
@@ -126,31 +226,35 @@
       running = true;
       $("dot").classList.add("live");
       $("status").textContent = "Listening · Chant clearly at a natural pace";
-      $("start").disabled = true; $("stop").disabled = false;
+      $("start").disabled = true;
+      $("stop").disabled = false;
     };
 
     recognition.onresult = event => {
-      let finalText = "";
       let interimText = "";
+      let newestFinalText = "";
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const result = event.results[i];
-        const text = result[0].transcript || "";
-        if (result.isFinal) finalText += " " + text;
-        else interimText += " " + text;
-      }
-      const shown = (finalText + " " + interimText).trim();
-      if (shown) $("heard").textContent = shown;
+        if (result.isFinal) {
+          // Browser result indices remain stable. This prevents processing the same
+          // finalized result again if the browser sends a later update event.
+          if (processedFinalIndices.has(i)) continue;
+          processedFinalIndices.add(i);
 
-      // Count only finalized recognition results, not interim hypotheses.
-      // Each finalized result is processed once by the browser event stream.
-      if (finalText.trim()) {
-        const matches = finalText.match(phrase);
-        if (matches) {
-          const remaining = Number($("target").value) - count;
-          count += Math.min(matches.length, remaining);
-          render();
+          const chosen = chooseAlternative(result);
+          if (chosen.text) newestFinalText += " " + chosen.text;
+          if (chosen.matches > 0) {
+            const accepted = Math.min(chosen.matches, Number($("target").value) - count);
+            count += accepted;
+            automatic += accepted;
+            render();
+          }
+        } else {
+          interimText += " " + (result[0].transcript || "");
         }
       }
+      const displayText = (newestFinalText + " " + interimText).trim();
+      if (displayText) $("heard").textContent = displayText;
     };
 
     recognition.onerror = event => {
@@ -160,12 +264,13 @@
 
     recognition.onend = () => {
       if (running && count < Number($("target").value)) {
-        // Chrome may end a continuous session; restart while the user has not pressed Stop.
-        try { recognition.start(); } catch (e) { /* a restart may already be pending */ }
+        processedFinalIndices = new Set(); // Chrome may reset result indices after a service restart.
+        try { recognition.start(); } catch (e) { /* restart may already be pending */ }
       } else {
         running = false;
         $("dot").classList.remove("live");
-        $("start").disabled = false; $("stop").disabled = true;
+        $("start").disabled = false;
+        $("stop").disabled = true;
         if (count < Number($("target").value)) $("status").textContent = "Stopped · Tap Start listening to continue";
       }
     };
@@ -174,22 +279,29 @@
     catch (e) { $("status").textContent = "Could not start microphone. Check permission and try again."; }
   }
 
-  function stopListening() {
-    running = false;
-    if (recognition) { try { recognition.stop(); } catch (e) {} }
-    $("dot").classList.remove("live");
-    $("start").disabled = false; $("stop").disabled = true;
-    $("status").textContent = "Paused";
-  }
-
   $("start").addEventListener("click", startListening);
   $("stop").addEventListener("click", stopListening);
+  $("testAlarm").addEventListener("click", () => playCompletionAlarm(true));
+  $("plus").addEventListener("click", () => {
+    if (count < Number($("target").value)) { count++; adjustments++; render(); }
+  });
+  $("minus").addEventListener("click", () => {
+    if (count > 0) { count--; adjustments++; render(); }
+  });
   $("reset").addEventListener("click", () => {
-    stopListening(); count = 0; $("heard").textContent = "Your recognized words will appear here.";
-    $("complete").textContent = ""; render(); $("status").textContent = "Ready · Tap Start listening";
+    stopListening();
+    count = 0; automatic = 0; adjustments = 0;
+    processedFinalIndices = new Set();
+    completionTriggered = false;
+    $("heard").textContent = "Your recognized words will appear here.";
+    $("complete").textContent = "";
+    render();
+    $("status").textContent = "Ready · Tap Start listening";
   });
   $("target").addEventListener("change", () => {
-    $("complete").textContent = ""; render();
+    completionTriggered = false;
+    $("complete").textContent = "";
+    render();
   });
   render();
 })();
